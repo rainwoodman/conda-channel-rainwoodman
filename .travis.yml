@@ -42,14 +42,14 @@ install:
     - conda install --quiet conda
 
     # set the ordering of additional channels
-    - conda config --prepend channels defaults
     - conda config --append channels rainwoodman
     - conda config --append channels conda-forge # for conda-build-all (will be moved to defaults soon)
+    - conda config --prepend channels defaults
 
     # Install a couple of dependencies we need for sure.
     - conda install --quiet --yes anaconda-client=1.6.2 jinja2 cython pycrypto
     - conda install ruamel_yaml
-    - conda install readline xorg-libxt xorg-libxaw xorg-libx11 ncurses
+    - conda install xorg-libxt xorg-libxaw xorg-libx11
 
     # latest conda build
     - conda install conda-build=2
