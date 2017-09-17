@@ -4,3 +4,5 @@
 
 - name: bigfile
 
+- name: ngspice
+  version : 26
