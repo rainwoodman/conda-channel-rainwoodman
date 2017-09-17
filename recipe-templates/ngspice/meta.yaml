@@ -1,0 +1,59 @@
+{% set name = "ngspice" %}
+
+package:
+  name: {{ name|lower }}
+  version: "{{version}}"
+
+source:
+  fn: ngspice-26.tar.gz
+  url: https://versaweb.dl.sourceforge.net/project/ngspice/ng-spice-rework/26/ngspice-26.tar.gz
+  md5: 7fd9cdd11b1bb109eb48201222de4c50
+
+build:
+  number : 0
+
+requirements:
+  build:
+    - xorg-libice
+    - xorg-libsm
+    - xorg-libx11
+    - xorg-libxau
+    - xorg-libxaw
+    - xorg-libxdmcp
+    - xorg-libxext
+    - xorg-libxmu
+    - xorg-libxpm
+    - xorg-libxt
+    - xorg-xextproto
+    - xorg-xproto
+    - ncurses
+    - gcc
+    - readline
+
+  run:
+    - readline
+    - ncurses
+    - xorg-libice
+    - xorg-libsm
+    - xorg-libx11
+    - xorg-libxau
+    - xorg-libxaw
+    - xorg-libxdmcp
+    - xorg-libxext
+    - xorg-libxmu
+    - xorg-libxpm
+    - xorg-libxt
+    - xorg-xextproto
+    - xorg-xproto
+
+test:
+
+about:
+  home: http://ngspice.sourceforge.net/index.html
+  license: Modified BSD
+  summary: 'ngspice; EDA software'
+  license_family: BSD
+
+extra:
+  recipe-maintainers:
+    - rainwoodman
