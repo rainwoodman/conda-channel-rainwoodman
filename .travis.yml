@@ -1,0 +1,76 @@
+# The language in this case has no bearing - we are going to be making use of "conda" for a
+# python distribution for the scientific python stack.
+language: c
+
+os:
+  - linux
+  - osx
+
+env:
+    global:
+        - DESTINATION_CONDA_CHANNEL="bccp"
+        - TARGET_ARCH="x64"
+        - CONDA_INSTALL_LOCN="${HOME}/miniconda"
+
+        # Defines BINSTAR_TOKEN for your binstar channel
+        - secure: "YdbGwSbgse5em6k/8tYCQgufbH8qkweofoS/05m35EJ6oqW/R2mybiY458IgQKQd8b0JrkJLswNPSbs5XylA/8fvi9EyW2OhORSk2VxjqKePRatzdJ/3ZFU1qt5ayhGmk3PgRly7JMqKyutGopRgI8QLa2NiHef7IIE0ca/CPHsbu2vS3CQj+nOVxNeEyVE2c+lKn9GpMrvuj+p5na73UV5tlE/JxtNIvV1WmARr+uJ3+zczGD1SXoHX3+agJMvgwaRkpOSoQ3U8BT6bKf8AeMTWJR1MhLA5BALn1OAa/hSp+w2dpgPSUDSugeZ7BWIPhVAnsDBBm19XrNLeMm9ZOctxYw7qYRvinLCBQrfgwQBb9oSBVfpij/+ul2d2t2FFlA+kThCePHnW44GoU6TX8BIeB+0xNN+F5AxClTtQtBd1TvoQ3wVKHhkZsprfK5cav7A6Nrd4T3KU3v+aPpQJf+lvEKlVWiswzw2SawW7/BL5l20flbi/nl+I5uK3/kx6p2LzEFt4JCZQg9TedHZd7au8IPtQrbtOOKKyWOOZCVtAUGDe4WwRlHUDolzYeB8CmfESJHeiQQNiD/U4JqR9EORIHO8mrOyqC8Fo/NZsnaoLJDAHH2of1Ew2nnIzFqpsQu4CHPBokh062x5mHAFMCrNsIIVPd2SyxMGVQNzWEvU="
+
+        # The python build restriction MUST be set at the moment, though it
+        # can have any value. The setting below avoids known-bad builds on
+        # python 2.6 and 3.3 for some packages.
+        - PYTHON_BUILD_RESTRICTIONS="2.7*|>3.4"
+
+        - NUMPY_BUILD_RESTRICTION="numpy >=1.11*"
+        # The value below needs to be set but will be ignored.
+        - CONDA_NPY="1.11"
+        - CONDA_VERSION=4.2*
+
+# Matrix is fully specified (for now) by os versions
+
+install:
+    # Install and set up miniconda.
+    - if [ $TRAVIS_OS_NAME == "linux" ]; then wget http://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh; fi
+    - if [ $TRAVIS_OS_NAME == "osx" ]; then wget http://repo.continuum.io/miniconda/Miniconda3-latest-MacOSX-x86_64.sh -O miniconda.sh; fi
+    - bash miniconda.sh -b -p $CONDA_INSTALL_LOCN
+    - export PATH=${CONDA_INSTALL_LOCN}/bin:$PATH
+    - conda config --set always_yes true
+
+    # pin conda verson to 4.3.22
+    - conda config --set auto_update_conda False
+    - echo "conda ==4.3.22" >> ${CONDA_INSTALL_LOCN}/conda-meta/pinned
+
+    - conda install --quiet conda
+
+    # set the ordering of additional channels
+    - conda config --prepend channels defaults
+    - conda config --append channels rainwoodman
+    - conda config --append channels conda-forge # for conda-build-all (will be moved to defaults soon)
+
+    # Install a couple of dependencies we need for sure.
+    - conda install --quiet --yes anaconda-client=1.6.2 jinja2 cython pycrypto
+    - conda install ruamel_yaml
+    - conda install readline xorg-libxt xorg-libxaw
+
+    # latest conda build
+    - conda install conda-build=2
+
+    # Install conda-build-all
+    - conda install -c conda-forge conda-build-all
+
+    # To ease debugging, list installed packages
+    - conda info -a
+
+script:
+    # Only upload if this is NOT a pull request.
+    - INSPECT="--inspect-channels rainwoodman"
+    - UPLOAD="";
+    - if [ "$TRAVIS_PULL_REQUEST" = "false" ]; then
+        if [ $TRAVIS_REPO_SLUG = "rainwoodman/conda-channel-rainwoodman" ]; then
+          echo "Uploading enabled";
+          UPLOAD="--upload-channels $DESTINATION_CONDA_CHANNEL";
+        fi;
+      fi
+    # Get ready to build.
+    - python extrude_recipes requirements.yml
+    # Packages are uploaded as they are built.
+    - if [[ -d recipes ]]; then conda build-all recipes --matrix-max-n-minor-versions 3 --matrix-conditions "python $PYTHON_BUILD_RESTRICTIONS" "$NUMPY_BUILD_RESTRICTION"  $INSPECT $UPLOAD; fi
