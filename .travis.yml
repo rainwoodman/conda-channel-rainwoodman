@@ -13,7 +13,7 @@ env:
         - CONDA_INSTALL_LOCN="${HOME}/miniconda"
 
         # Defines BINSTAR_TOKEN for your binstar channel
-        - secure: "YdbGwSbgse5em6k/8tYCQgufbH8qkweofoS/05m35EJ6oqW/R2mybiY458IgQKQd8b0JrkJLswNPSbs5XylA/8fvi9EyW2OhORSk2VxjqKePRatzdJ/3ZFU1qt5ayhGmk3PgRly7JMqKyutGopRgI8QLa2NiHef7IIE0ca/CPHsbu2vS3CQj+nOVxNeEyVE2c+lKn9GpMrvuj+p5na73UV5tlE/JxtNIvV1WmARr+uJ3+zczGD1SXoHX3+agJMvgwaRkpOSoQ3U8BT6bKf8AeMTWJR1MhLA5BALn1OAa/hSp+w2dpgPSUDSugeZ7BWIPhVAnsDBBm19XrNLeMm9ZOctxYw7qYRvinLCBQrfgwQBb9oSBVfpij/+ul2d2t2FFlA+kThCePHnW44GoU6TX8BIeB+0xNN+F5AxClTtQtBd1TvoQ3wVKHhkZsprfK5cav7A6Nrd4T3KU3v+aPpQJf+lvEKlVWiswzw2SawW7/BL5l20flbi/nl+I5uK3/kx6p2LzEFt4JCZQg9TedHZd7au8IPtQrbtOOKKyWOOZCVtAUGDe4WwRlHUDolzYeB8CmfESJHeiQQNiD/U4JqR9EORIHO8mrOyqC8Fo/NZsnaoLJDAHH2of1Ew2nnIzFqpsQu4CHPBokh062x5mHAFMCrNsIIVPd2SyxMGVQNzWEvU="
+        - secure: "lgvmgG8M6XjqT9jeTYpVcbY+OaxQ7d65HtcfpmJHTy4jbwsS3hktT2F8DJQLEeWXQV/8GLxKNOJuRRmh+x7SWuVjXXje16oBOCYIrkluJQw4zOGZr1HCK+lqaz3iyqMfmZjUpeETSwNrdqq0lZqQ87DR8SuHAKD2EN3KJfzb6qCTJJPvf8lowLVEq55gkoM9oCafLh+o5aBtbx86rVXeKtPdoaqFlQbhHIy1AJBsxiXYJmxunanL6gTf42H6fzi/5xU2Hx8U+IxNTmxNkbpEURq4XcyxnqjIunH8P4YEsjarIpvAgfH8WqAFXLi8OkaobTGUGIZTn+TQfer3mQz8hCNC8GIWs21Ycn4tmozvvvgK5Cpz4HcKAlSwK0DvlBzusctA58knKVGAw0gkOC7gNH/oP9hv3Zw6uzmxUXu8TA8bARBp3EwH6fAbQwEInletfPi6nENaWCIj0WGg+CS4hM8Xlw4iVuVz8dk3tzIC0Krfi9VyTN8fUwCrvP3mHpKHLe2710hN7UkT9fCoG/mQfPiAva8uyutf1mkjMOyFDg6Wkjqt3MHy8iBxjOezRtcip6H9cAOzaiuQE4r/kCg5LcQz7hAR0QHSMwD6FegiRg5l3bXU+8Bzycl3nifJyTzS6K4cWvl99Z7X9U2aImeVe8lktkzJORPWIg0as2oU9bo="
 
         # The python build restriction MUST be set at the moment, though it
         # can have any value. The setting below avoids known-bad builds on
