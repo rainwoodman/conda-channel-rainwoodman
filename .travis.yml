@@ -52,7 +52,7 @@ install:
     - conda install xorg-libxt xorg-libxaw xorg-libx11
 
     # latest conda build
-    - conda install conda-build=3
+    - conda install conda-build=2
 
     # Install conda-build-all
     - conda install -c conda-forge conda-build-all
