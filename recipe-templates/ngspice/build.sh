@@ -1,8 +1,9 @@
 #!/bin/bash
+set -x
 if [[ $OSTYPE == darwin* ]]; then
     export CFLAGS="-headerpad_max_install_names"
     export LDFLAGS="${LDFLAGS} -headerpad_max_install_names"
-    export CXXFLAGS=$CFLAGS
+    export CXXFLAGS="$CFLAGS"
 fi
 
 ./configure --prefix=$PREFIX --with-x --with-readline
