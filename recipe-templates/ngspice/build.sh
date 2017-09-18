@@ -6,7 +6,7 @@ if [[ $OSTYPE == darwin* ]]; then
     export CXXFLAGS="$CFLAGS"
 fi
 
-./configure --prefix=$PREFIX --with-x #--with-readline
+./configure --prefix=$PREFIX --with-x --with-readline --enable-static
 
 make -j$CPU_COUNT
 make install
