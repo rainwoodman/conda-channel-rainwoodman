@@ -6,5 +6,5 @@
 
 - name: classylss
 
-- name: ngspice
-  version : 26
+#- name: ngspice
+#  version : 26
