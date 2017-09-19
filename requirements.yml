@@ -4,5 +4,7 @@
 
 - name: bigfile
 
+- name: classylss
+
 - name: ngspice
   version : 26

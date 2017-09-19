@@ -1,0 +1,43 @@
+{% set name = "classylss" %}
+
+package:
+  name: {{ name|lower }}
+  version: "{{version}}"
+
+source:
+  fn: {{ name }}-{{ version }}.tar.gz
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  md5: {{ md5 }}
+
+build:
+  number : 3
+
+requirements:
+  build:
+    - python
+    - setuptools
+    - numpy x.x
+    - six # only needed to download class, if needed
+    - gcc
+    - cython
+
+  run:
+    - python
+    - cython
+    - numpy x.x
+    - libgcc
+
+test:
+  # Python imports
+  imports:
+    - classylss
+
+about:
+  home: http://github.com/nickhand/classylss
+  license: GPL3
+  summary: 'python binding of CLASS for large-scale structure calculations'
+  license_family: GPL3
+
+extra:
+  recipe-maintainers:
+    - rainwoodman
